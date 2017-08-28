@@ -20,6 +20,7 @@ const CliLogger = require('entoj-system').cli.CliLogger;
 const ErrorHandler = require('entoj-system').error.ErrorHandler;
 const co = require('co');
 const inquirer = require('inquirer');
+const path = require('co');
 
 
 /**
@@ -35,7 +36,9 @@ class ScaffoldEntityCommand extends Command
 
         // Assign options
         this._name = 'scaffold';
-        this._templatePath = templatePath || '';
+        this._templatePath = templatePath
+            ? path.normalize(templatePath)
+            : '';
     }
 
 
@@ -228,6 +231,8 @@ class ScaffoldEntityCommand extends Command
                 site: values.site,
                 javascript: (typeof answers.javascript !== 'undefined') ? answers.javascript : values.javascript,
                 destination: parameters.destination
+                    ? path.normalize(parameters.destination)
+                    : undefined
             };
             return result;
         })
@@ -266,7 +271,7 @@ class ScaffoldEntityCommand extends Command
                 writePath: configuration.destination
                     ? configuration.destination
                     : yield pathesConfiguration.resolveEntityId(configuration.entityId),
-                readPath: scope.templatePath + '/**/*.*',
+                readPath: scope._templatePath + path.sep + '**' + path.sep + '*.*',
                 readPathBase: scope.templatePath,
                 templateData:
                 {

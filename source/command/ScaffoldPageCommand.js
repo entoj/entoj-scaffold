@@ -18,6 +18,7 @@ const WriteFilesTask = require('entoj-system').task.WriteFilesTask;
 const CliLogger = require('entoj-system').cli.CliLogger;
 const co = require('co');
 const inquirer = require('inquirer');
+const path = require('path');
 
 
 /**
@@ -33,7 +34,9 @@ class ScaffoldPageCommand extends Command
 
         // Assign options
         this._name = 'scaffold';
-        this._templatePath = templatePath || '';
+        this._templatePath = templatePath
+            ? path.normalize(templatePath)
+            : '';
     }
 
 
@@ -197,6 +200,8 @@ class ScaffoldPageCommand extends Command
                 entityId: values.entityId.entityId,
                 site: values.site,
                 destination: parameters.destination
+                    ? path.normalize(parameters.destination)
+                    : undefined
             };
             return result;
         })
@@ -238,7 +243,7 @@ class ScaffoldPageCommand extends Command
                 writePath: configuration.destination
                     ? configuration.destination
                     : yield pathesConfiguration.resolveEntityId(configuration.entityId),
-                readPath: scope._templatePath + '/**/*.*',
+                readPath: scope._templatePath + path.sep + '**' + path.sep + '*.*',
                 readPathBase: scope._templatePath,
                 templateData:
                 {
