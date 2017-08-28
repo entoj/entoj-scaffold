@@ -20,7 +20,7 @@ const CliLogger = require('entoj-system').cli.CliLogger;
 const ErrorHandler = require('entoj-system').error.ErrorHandler;
 const co = require('co');
 const inquirer = require('inquirer');
-const path = require('co');
+const path = require('path');
 
 
 /**
