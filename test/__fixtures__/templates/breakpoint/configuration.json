@@ -1,0 +1,13 @@
+{
+    "files":
+    [
+        {
+            "template": "breakpoints.scss",
+            "file": "sites/base/global/sass/_breakpoints.scss"
+        },
+        {
+            "template": "breakpoints.js",
+            "file": "sites/base/global/js/breakpoints.js"
+        }
+    ]
+}

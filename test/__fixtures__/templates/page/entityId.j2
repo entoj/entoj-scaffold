@@ -1,0 +1,11 @@
+{% extends '/base/templates/t-bare' %}
+
+    {% block header %}
+        {{ g_header(model='g-header/default') }}
+    {% endblock %}
+    {% block content %}
+        <h1><$ entityId.asString('id') $></h1>
+    {% endblock %}
+    {% block footer %}
+        {{ g_footer(model='g-footer/default') }}
+    {% endblock %}

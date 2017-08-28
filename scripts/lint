@@ -1,0 +1,16 @@
+#!/bin/bash
+
+# Prepare
+export FORCE_COLOR=true
+set -e
+
+# Prepare pathes
+SELF=$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )
+ESLINT=$SELF/../node_modules/.bin/eslint
+
+# Doit
+echo "Linting files in ./source/$1"
+$ESLINT ./source/$1
+
+echo "Linting files in ./test/$1"
+$ESLINT ./test/$1

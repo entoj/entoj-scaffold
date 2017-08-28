@@ -1,0 +1,32 @@
+#!/bin/bash
+
+# Prepare
+export FORCE_COLOR=true
+set -e
+
+# Prepare pathes
+SELF=$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )
+MOCHA=$SELF/../node_modules/mocha/bin/mocha
+_MOCHA=$SELF/../node_modules/mocha/bin/_mocha
+ISTANBUL=$SELF/../node_modules/istanbul/lib/cli.js
+CODE_COVERAGE="false"
+
+# Prepare options
+for arg do
+  shift
+  [ "$arg" = "--coverage" ] && CODE_COVERAGE="true" && continue
+  set -- "$@" "$arg"
+done
+
+# Prepare runner
+if [ "$CODE_COVERAGE" == "true" ]
+    then
+        echo "Running tests with code coverage"
+        RUNNER="node $ISTANBUL cover $_MOCHA -- "
+    else
+        echo "Running tests"
+        RUNNER="$MOCHA"
+fi
+
+# Doit
+$RUNNER "$@" "./test/**/*Spec.js";

@@ -1,0 +1,52 @@
+/**
+ * Breakpoints
+ *
+ * This file was generated via 'entoj scaffold breakpoint'
+ *
+ * @type {Map}
+ */
+$breakpoint-settings:
+(
+<%- for name, settings in breakpoints %>
+    <$ name.dasherize() $>:
+    (
+<%- for key, value in settings %>
+        <$ key.dasherize() $>: <$ value $><% if not loop.last %>, <% endif %><% endfor %>
+    )<% if not loop.last %>, <% endif %>
+<% endfor -%>
+);
+
+/**
+ * Encloses @content in the given breakpoint.
+ * Use $mode to configure the range of the breakpoint (above & below)
+ *
+ * @see $breakpoint-settings
+ * @param {String} $name - The name of the breakpoint. Defaults to mobile.
+ * @param {Enumeration} $mode - (above, self, below)
+ */
+@mixin use-breakpoint($name: mobile, $mode: self, $custom-settings: none) {
+    $settings: ();
+    $media-query: ();
+
+    @if ($custom-settings != none) {
+        $settings: $custom-settings;
+    } @else {
+        $settings: map-get($breakpoint-settings, $name);
+    }
+
+    @if ($mode == self) {
+        $media-query: (min-width (map-get-default($settings, min-width, 0))) (max-width (map-get-default($settings, max-width, 1600px)));
+    }
+    @if ($mode == below) {
+        $media-query: (max-width map-get-default($settings, max-width, 1600px));
+    }
+    @if ($mode == above) {
+        $media-query: (min-width map-get-default($settings, min-width, 0));
+    }
+
+    @if ($media-query) {
+        @include breakpoint($media-query) {
+            @content;
+        }
+    }
+}

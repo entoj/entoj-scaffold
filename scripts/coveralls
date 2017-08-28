@@ -1,0 +1,16 @@
+#!/bin/bash
+
+# Prepare
+export FORCE_COLOR=true
+set -e
+
+# Prepare pathes
+SELF=$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )
+COVERALL=$SELF/../node_modules/.bin/coveralls
+LCOV=$SELF/../coverage/lcov.info
+
+# Go
+$SELF/test --coverage
+
+echo "Uploading coverage datato coveralls.io"
+$COVERALL < $LCOV

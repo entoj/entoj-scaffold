@@ -1,0 +1,16 @@
+{##
+    @param {Object} [model] - The data model
+    @param {String} [classes] - Any additional classes that will be added to the root element
+#}
+{% macro <$ entityId.asString('id').lodasherize() $>(model=false, classes='') %}
+
+    {# Prepare #}
+    {% set model = model|load %}
+    {% set moduleClass = '<$ entityId.asString('id') $>' %}
+
+    {# Render #}
+    <$ javascript $>
+    <div class="{{ moduleClass }} {{ classes }}" <% if javascript %>data-entity="{{ moduleClass }}"<% endif %>>
+    </div>
+
+{%  endmacro %}

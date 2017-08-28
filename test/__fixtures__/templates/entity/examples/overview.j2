@@ -1,0 +1,7 @@
+{% extends "/base/templates/t-example" %}
+
+{% block content %}
+    {% call t_example_item() %}
+        {{ <$ entityId.asString('id').lodasherize() $>() }}
+    {% endcall %}
+{% endblock %}
