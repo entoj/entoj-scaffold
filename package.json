@@ -20,13 +20,14 @@
     "inquirer": "^3.2.2"
   },
   "devDependencies": {
-    "chai": "*",
-    "coveralls": "*",
-    "eslint": "*",
-    "git-changelog": "*",
-    "ink-docstrap": "*",
-    "istanbul": "*",
-    "jsdoc": "*",
-    "mocha": "*"
+    "chai": "^4.0.2",
+    "coveralls": "^2.13.1",
+    "eslint": "^4.1.1",
+    "git-changelog": "^1.1.2",
+    "ink-docstrap": "^1.3.0",
+    "istanbul": "^0.4.5",
+    "jsdoc": "^3.4.3",
+    "jspm": "^0.16.53",
+    "mocha": "^3.4.2"
   }
 }
