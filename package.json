@@ -15,7 +15,7 @@
     "chai-fs-latest": "^0.1.0",
     "co": "^4.6.0",
     "co-fs-extra": "^1.2.1",
-    "entoj-system": "^0.1.10",
+    "entoj-system": "^0.1.11",
     "inquirer": "^3.2.2"
   },
   "devDependencies": {
