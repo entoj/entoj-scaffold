@@ -235,8 +235,7 @@ class ScaffoldEntityCommand extends Command
                     : undefined
             };
             return result;
-        })
-        .catch(ErrorHandler.handler(scope));
+        }).catch(ErrorHandler.handler(scope));
         return promise;
     }
 
@@ -281,13 +280,13 @@ class ScaffoldEntityCommand extends Command
                 },
                 renameFiles:
                 {
-                    '(.*)entityId\.(.*)': '$1' + configuration.entityId.asString('id') + '.$2'
+                    '(.*)entityId.(.*)': '$1' + configuration.entityId.asString('id') + '.$2'
                 },
                 removeFiles: []
             };
             if (!configuration.javascript)
             {
-                options.removeFiles.push('(.*)\.js$');
+                options.removeFiles.push('(.*).js$');
             }
 
             yield scope.context.di.create(ReadFilesTask, mapping)
@@ -299,8 +298,7 @@ class ScaffoldEntityCommand extends Command
 
             // Done
             logger.end(section);
-        })
-        .catch(ErrorHandler.handler(scope));
+        }).catch(ErrorHandler.handler(scope));
         return promise;
     }
 

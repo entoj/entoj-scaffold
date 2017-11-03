@@ -204,8 +204,7 @@ class ScaffoldPageCommand extends Command
                     : undefined
             };
             return result;
-        })
-        .catch(function(error)
+        }).catch(function(error)
         {
             logger.error(error);
         });
@@ -252,7 +251,7 @@ class ScaffoldPageCommand extends Command
                 },
                 renameFiles:
                 {
-                    '(.*)entityId\.(.*)': '$1' + configuration.entityId.asString('id') + '.$2'
+                    '(.*)entityId.(.*)': '$1' + configuration.entityId.asString('id') + '.$2'
                 }
             };
             logger.options(options);
@@ -264,8 +263,7 @@ class ScaffoldPageCommand extends Command
 
             // Done
             logger.end(section);
-        })
-        .catch(function(error)
+        }).catch(function(error)
         {
             logger.error(error);
         });
