@@ -138,7 +138,7 @@ class ScaffoldPageCommand extends Command
             }
             else if (parameters._.length == 2)
             {
-                values.site = yield sitesRepository.findBy(Site.NAME, parameters._[0]);
+                values.site = yield sitesRepository.findBy({ '*': parameters._[0] });
                 values.entityId = yield entityIdParser.parse(parameters._[1]);
             }
             if (values.entityId)
