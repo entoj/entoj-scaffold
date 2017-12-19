@@ -36,9 +36,7 @@ class ScaffoldEntityCommand extends Command
 
         // Assign options
         this._name = 'scaffold';
-        this._templatePath = templatePath
-            ? path.normalize(templatePath)
-            : '';
+        this._templatePath = templatePath || '';
     }
 
 
@@ -265,13 +263,14 @@ class ScaffoldEntityCommand extends Command
             mapping.set(CliLogger, logger);
             const pathesConfiguration = scope.context.di.create(PathesConfiguration);
             const buildConfiguration = scope.context.di.create(BuildConfiguration);
+            const templatePath = yield pathesConfiguration.resolve(scope.templatePath);
             const options =
             {
                 writePath: configuration.destination
                     ? configuration.destination
                     : yield pathesConfiguration.resolveEntityId(configuration.entityId),
-                readPath: scope._templatePath + path.sep + '**' + path.sep + '*.*',
-                readPathBase: scope.templatePath,
+                readPath: templatePath + path.sep + '**' + path.sep + '*.*',
+                readPathBase: templatePath,
                 templateData:
                 {
                     entityId: configuration.entityId,

@@ -237,13 +237,14 @@ class ScaffoldPageCommand extends Command
             mapping.set(CliLogger, logger);
             const pathesConfiguration = scope.context.di.create(PathesConfiguration);
             const buildConfiguration = scope.context.di.create(BuildConfiguration);
+            const templatePath = yield pathesConfiguration.resolve(scope.templatePath);
             const options =
             {
                 writePath: configuration.destination
                     ? configuration.destination
                     : yield pathesConfiguration.resolveEntityId(configuration.entityId),
-                readPath: scope._templatePath + path.sep + '**' + path.sep + '*.*',
-                readPathBase: scope._templatePath,
+                readPath: templatePath + path.sep + '**' + path.sep + '*.*',
+                readPathBase: templatePath,
                 templateData:
                 {
                     entityId: configuration.entityId,
