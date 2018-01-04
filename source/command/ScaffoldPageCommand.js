@@ -184,6 +184,15 @@ class ScaffoldPageCommand extends Command
                     name: 'site',
                     message: 'Select a site',
                     choices: yield sitesRepository.getPropertyList(Site.NAME),
+                    filter: function(input)
+                    {
+                        const promise = co(function *()
+                        {
+                            values.site = yield sitesRepository.findBy({ '*': input });
+                            return values.site;
+                        });
+                        return promise;
+                    },
                     when: function()
                     {
                         const hasData = (values.site);
@@ -242,7 +251,7 @@ class ScaffoldPageCommand extends Command
             {
                 writePath: configuration.destination
                     ? configuration.destination
-                    : yield pathesConfiguration.resolveEntityId(configuration.entityId),
+                    : yield pathesConfiguration.resolveEntityIdForSite(configuration.entityId, configuration.site),
                 readPath: templatePath + path.sep + '**' + path.sep + '*.*',
                 readPathBase: templatePath,
                 templateData:
